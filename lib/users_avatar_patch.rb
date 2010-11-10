@@ -1,5 +1,5 @@
-require 'application'
-#require 'user' 
+require 'application_controller'
+require 'user' 
 
 module LocalAvatarsPlugin
   module UsersAvatarPatch
