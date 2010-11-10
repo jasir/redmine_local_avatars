@@ -1,4 +1,4 @@
-require 'application_helper'
+require_dependency 'application_helper'
 
 module LocalAvatarsPlugin
   module ApplicationAvatarPatch
