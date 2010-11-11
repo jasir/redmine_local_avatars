@@ -3,8 +3,8 @@ module LocalAvatars
 	def send_avatar(user)
 		av = user.attachments.find_by_description 'avatar'
 		send_file(av.diskfile, :filename => filename_for_content_disposition(av.filename),
-																		:type => av.content_type, 
-																		:disposition => (av.image? ? 'inline' : 'attachment')) if av 
+		                       :type => av.content_type, 
+		                       :disposition => (av.image? ? 'inline' : 'attachment')) if av 
 	end
 
 	# expects @user to be set.
@@ -13,11 +13,11 @@ module LocalAvatars
 		# clear the attachments.  Then, save if 
 		# we have to delete.  Otherwise add the new
 		# avatar and then save
+		# TODO:  This doesn't play nice with any other possible
+		# attachments on the user (just because there aren't any
+		# now doesn't mean there won't be in the future.  It should
+		# be changed to only remove an attachment with description == 'avatar'
 		@user.attachments.clear
-
-		puts("params[:commit]: #{params[:commit]}")
-		puts("l(:button_delete): #{l(:button_delete)}", "l(:button_save): #{l(:button_save)}")
-
 		if params[:commit] == l(:button_delete) then
 			@possible_error = l(:unable_to_delete_avatar)
 			@user.save!
