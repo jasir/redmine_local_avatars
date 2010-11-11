@@ -11,6 +11,10 @@ can also manage users' avatars through the /users section.
 Simply place the plugin in the vendors/plugins directory of your Redmine
 installation (or create a symlink).
 
+== Compatibility
+
+Tested on Redmine trunk r4388	(version 1.0.3).  Should be compatible with
+all Redmine versions 1.0.x.
 
 == Authors
 
