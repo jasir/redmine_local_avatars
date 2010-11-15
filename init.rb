@@ -32,9 +32,9 @@ require_dependency 'redmine_local_avatars/hooks'
 
 Redmine::Plugin.register :redmine_local_avatars do
   name 'Redmine Local Avatars plugin'
-  author 'A. Chaika and others'
-  description 'This is a plugin for Redmine'
-	version '0.0.3'
+  author 'Andrew Chaika and Luca Pireddu'
+  description 'This plugin lets users upload avatars directly into Redmine'
+	version '0.1.0'
 end
 
 if RAILS_ENV == 'development' then
