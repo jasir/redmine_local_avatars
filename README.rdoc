@@ -16,6 +16,8 @@ installation (or create a symlink).
 Tested on Redmine trunk r4388	(version 1.0.3).  Should be compatible with
 all Redmine versions 1.0.x.
 
+At the moment the plugin doesn't work when running in development mode.
+
 == Authors
 
 A. Chaika wrote the original version:
@@ -23,12 +25,12 @@ A. Chaika wrote the original version:
 * https://github.com/Ubik/redmine_local_avatars
 
 Luca Pireddu <pireddu@gmail.com> at CRS4 (http://www.crs4.it), 
-largely based on the work of A. Chaika.
+contributed updates and improvements.
 
 
 == Warranty.  What warranty?
 
-This plugin was written for use in our intranet with simple requirements in 
+This plugin was written for use in an intranet with simple requirements in 
 mind.  In particular, not much attention has been payed to security issues 
 and there hasn't been any thorough testing.  Use it at your own risk.  
 Patches are welcome.
