@@ -16,8 +16,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-
-require_dependency 'account_controller'
 require 'local_avatars'
 
 module LocalAvatarsPlugin
@@ -25,23 +23,16 @@ module LocalAvatarsPlugin
 
 		def self.included(base) # :nodoc:
 			base.class_eval do
-				unloadable
 				helper :attachments
 				include AttachmentsHelper 
 			end
-
-			base.send(:include, InstanceMethods)
 		end
 
-		module InstanceMethods
-			include LocalAvatars
+		include LocalAvatars
 
-			def get_avatar
-				@user = User.find(params[:id])
-				send_avatar(@user)
-			end
+		def get_avatar
+			@user = User.find(params[:id])
+			send_avatar(@user)
 		end
 	end
 end
-
-AccountController.send(:include, LocalAvatarsPlugin::AccountControllerPatch)

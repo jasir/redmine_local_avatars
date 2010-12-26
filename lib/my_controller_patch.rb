@@ -16,43 +16,35 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-
-require_dependency 'my_controller'
 require 'local_avatars'
 
 module LocalAvatarsPlugin
 	module MyControllerPatch
     def self.included(base) # :nodoc:    
       base.class_eval do      
-				unloadable
 				helper :attachments
 				include AttachmentsHelper 
 			end
-      base.send(:include, InstanceMethods)     
 		end
 
-		module InstanceMethods
-			include LocalAvatars
+		include LocalAvatars
 
-			def avatar
-				@user = User.current
-				render :partial => 'users/avatar', :layout => true
-			end
+		def avatar
+			@user = User.current
+			render :partial => 'users/avatar', :layout => true
+		end
 
-			def save_avatar
-				@user = User.current
-puts("MyControllerPatch#save_avatar")
-				begin
-					save_or_delete # see the LocalAvatars module
-					puts("out of save_or_delete")
-					redirect_to :action => 'account', :id => @user
-				rescue
-					puts("in catch block")
-					flash[:error] = @possible_error
-					redirect_to :action => 'avatar'
-				end
+		def save_avatar
+			@user = User.current
+			begin
+				save_or_delete # see the LocalAvatars module
+				redirect_to :action => 'account', :id => @user
+			rescue => e
+				$stderr.puts("save_or_delete raise an exception.  exception: #{e.class}:  #{e.message}")
+				flash[:error] = @possible_error || e.message
+				redirect_to :action => 'avatar'
 			end
-		end # InstanceMethods
+		end
   end
 end
-MyController.send(:include, LocalAvatarsPlugin::MyControllerPatch)
+

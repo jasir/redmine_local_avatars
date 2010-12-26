@@ -16,27 +16,37 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-
 require 'redmine'
-
-# patches to Redmine
-require_dependency "account_controller_patch.rb"
-require_dependency "application_helper_avatar_patch.rb"
-require_dependency "my_controller_patch.rb"
-require_dependency "users_avatar_patch.rb"   # User model
-require_dependency "users_controller_patch.rb"
-require_dependency "users_helper_avatar_patch.rb"  # UsersHelper
-
-# hooks
-require_dependency 'redmine_local_avatars/hooks'
 
 Redmine::Plugin.register :redmine_local_avatars do
   name 'Redmine Local Avatars plugin'
   author 'Andrew Chaika and Luca Pireddu'
   description 'This plugin lets users upload avatars directly into Redmine'
-	version '0.1.0'
+	version '0.1.1'
+end
+require 'dispatcher'
+
+Dispatcher.to_prepare(:redmine_local_avatars_prep) do
+	require_dependency 'principal'
+	require_dependency 'user'
+
+	AccountController.send(:include,  LocalAvatarsPlugin::AccountControllerPatch)
+	ApplicationHelper.send(:include,  LocalAvatarsPlugin::ApplicationAvatarPatch)
+	MyController.send(:include,  LocalAvatarsPlugin::MyControllerPatch)
+	User.send(:include,  LocalAvatarsPlugin::UsersAvatarPatch)
+	UsersController.send(:include,  LocalAvatarsPlugin::UsersControllerPatch)
+	UsersHelper.send(:include,  LocalAvatarsPlugin::UsersHelperPatch)
 end
 
-if RAILS_ENV == 'development' then
-  ActiveSupport::Dependencies.load_once_paths.reject!{|x| x =~ /^#{Regexp.escape(File.dirname(__FILE__))}/}
-end
+require 'local_avatars'
+
+# patches to Redmine
+require "account_controller_patch.rb"
+require "application_helper_avatar_patch.rb"
+require "my_controller_patch.rb"
+require "users_avatar_patch.rb"   # User model
+require "users_controller_patch.rb"
+require "users_helper_avatar_patch.rb"  # UsersHelper
+
+# hooks
+require 'redmine_local_avatars/hooks'
