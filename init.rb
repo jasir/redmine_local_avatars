@@ -24,9 +24,9 @@ Redmine::Plugin.register :redmine_local_avatars do
   description 'This plugin lets users upload avatars directly into Redmine'
 	version '0.1.1'
 end
-require 'dispatcher'
 
-Dispatcher.to_prepare(:redmine_local_avatars_prep) do
+ActionDispatch::Callbacks.to_prepare do
+	require_dependency 'project'
 	require_dependency 'principal'
 	require_dependency 'user'
 
