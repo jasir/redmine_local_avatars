@@ -20,6 +20,7 @@ require 'local_avatars'
 
 module LocalAvatarsPlugin
 	module MyControllerPatch
+    
     def self.included(base) # :nodoc:    
       base.class_eval do      
 				helper :attachments
@@ -31,11 +32,12 @@ module LocalAvatarsPlugin
 
 		def avatar
 			@user = User.current
-			render :partial => 'users/avatar', :layout => true
+#			render :partial => 'users/avatar', :layout => false
 		end
 
 		def save_avatar
 			@user = User.current
+      
 			begin
 				save_or_delete # see the LocalAvatars module
 				redirect_to :action => 'account', :id => @user
@@ -47,4 +49,3 @@ module LocalAvatarsPlugin
 		end
   end
 end
-

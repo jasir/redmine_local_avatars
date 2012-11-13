@@ -47,4 +47,3 @@ module LocalAvatarsPlugin
 		end
 	end
 end
-

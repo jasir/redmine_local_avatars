@@ -15,6 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+# encoding: utf-8
 
 require 'redmine'
 
@@ -29,8 +31,8 @@ ActionDispatch::Callbacks.to_prepare do
 	require_dependency 'project'
 	require_dependency 'principal'
 	require_dependency 'user'
-
-	AccountController.send(:include,  LocalAvatarsPlugin::AccountControllerPatch)
+  
+  AccountController.send(:include,  LocalAvatarsPlugin::AccountControllerPatch)
 	ApplicationHelper.send(:include,  LocalAvatarsPlugin::ApplicationAvatarPatch)
 	MyController.send(:include,  LocalAvatarsPlugin::MyControllerPatch)
 	User.send(:include,  LocalAvatarsPlugin::UsersAvatarPatch)
