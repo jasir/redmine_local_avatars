@@ -32,7 +32,6 @@ module LocalAvatarsPlugin
 
 		def avatar
 			@user = User.current
-#			render :partial => 'users/avatar', :layout => false
 		end
 
 		def save_avatar
