@@ -1,0 +1,8 @@
+# Czech strings go here
+cs:
+  label_avatar: "Avatar"
+  message_avatar_uploaded: "Avatar úspěšně nahrán"
+  button_change_avatar:  "Změnit obrázek uživatele - avatara"
+  are_you_sure_delete_avatar: "Jste si jisti že chcete smazat obrázak avatara?"
+  avatar_deleted:  "Avatar smazán"
+  unable_to_delete_avatar:  "Problém při mazání avatara, sorry."
